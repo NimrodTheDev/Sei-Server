@@ -1,15 +1,16 @@
-import express from 'express';
-import {
+const express = require('express');
+const cors = require('cors');
+const {
   sendSei,
   getBalance,
   createWallet,
   recorverWallet,
-} from './send'; // Replace with the correct file path
-import cors from 'cors';
+} = require('./send'); // Replace with the correct file path
+
 const app = express();
 const port = 4000;
 
-app.use(cors())
+app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -53,7 +54,7 @@ app.get('/', (req, res) => {
 app.post('/recoverWallet', async (req, res) => {
   const { mnemonic } = req.body;
   try {
-    console.log(mnemonic)
+    console.log(mnemonic);
     const result = await recorverWallet(String(mnemonic));
     res.status(200).json(result);
   } catch (error) {
