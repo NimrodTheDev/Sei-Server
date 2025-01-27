@@ -62,8 +62,8 @@ app.post('/recoverWallet', async (req, res) => {
   }
 });
 
-app.get('*', (req, res) => {
-  res.sendFile('index.html', { root: 'dist' });
+app.get('/health', (req, res) => {
+  res.send('Hello, World!');
 });
 
 // Start the server
