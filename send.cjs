@@ -24,7 +24,7 @@ async function sendSei(mnemonic, receiver, coin_amount) {
   ];
   const result = await client.sendTokens(firstAccount.address, recipientAddress, amount, "auto");
 //   assertIsBroadcastTxSuccess(result);
-
+  console.log("result: ", result);
   return result;
 }
 
@@ -46,13 +46,11 @@ async function createWallet() {
   // Get the first account in the wallet
   const accounts = await wallet.getAccounts();
 
-  console.log("Mnemonic:", mnemonic);
-  console.log("Address:", accounts[0]);
   return { ...accounts[0], mnemonic };
 }
 
 async function recorverWallet(mnemonic) {
-  console.log("Mnemonic:", mnemonic);
+  
   const hdPath = "m/44'/118'/0'/0/0";
   const sanitizedMnemonic = mnemonic.trim().replace(/\s+/g, ' ');
   const wallet = await DirectSecp256k1HdWallet.fromMnemonic(
@@ -61,7 +59,7 @@ async function recorverWallet(mnemonic) {
       prefix: "sei",
     }
   );
-  console.log("Mnemonic:", mnemonic, wallet);
+  
   let account = await wallet.getAccounts();
   return { ...account[0], mnemonic };
 }
